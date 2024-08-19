@@ -136,6 +136,18 @@ exports.Prisma.AppUsersScalarFieldEnum = {
   lastLogin: 'lastLogin'
 };
 
+exports.Prisma.ContactListScalarFieldEnum = {
+  id: 'id',
+  senderName: 'senderName',
+  senderEmail: 'senderEmail',
+  senderPhone: 'senderPhone',
+  totalViews: 'totalViews',
+  messageTitle: 'messageTitle',
+  message: 'message',
+  status: 'status',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -162,8 +174,14 @@ exports.Status = exports.$Enums.Status = {
   deleted: 'deleted'
 };
 
+exports.MessageStatus = exports.$Enums.MessageStatus = {
+  read: 'read',
+  unread: 'unread'
+};
+
 exports.Prisma.ModelName = {
-  AppUsers: 'AppUsers'
+  AppUsers: 'AppUsers',
+  ContactList: 'ContactList'
 };
 
 /**

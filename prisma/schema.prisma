@@ -22,13 +22,25 @@ model AppUsers {
   email        String    @unique
   phone_number String    @unique
   role         Role      @default(user)
-  otpCode       String?
-  status        Status @default(inactive)
-  isActive      Boolean @default(false)
-  isDeleted     Boolean @default(false)
+  otpCode      String?
+  status       Status    @default(inactive)
+  isActive     Boolean   @default(false)
+  isDeleted    Boolean   @default(false)
   createdAt    DateTime?
   updatedAt    DateTime?
   lastLogin    DateTime?
+}
+
+model ContactList {
+  id           String        @id @unique @default(uuid())
+  senderName   String?
+  senderEmail  String?
+  senderPhone  String?
+  totalViews   Int?
+  messageTitle String?
+  message      String?
+  status       MessageStatus @default(unread)
+  createdAt    DateTime      @default(now())
 }
 
 enum Role {
@@ -41,4 +53,9 @@ enum Status {
   active
   inactive
   deleted
+}
+
+enum MessageStatus {
+  read
+  unread
 }

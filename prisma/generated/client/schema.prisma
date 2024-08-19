@@ -31,6 +31,18 @@ model AppUsers {
   lastLogin    DateTime?
 }
 
+model ContactList {
+  id           String        @id @unique @default(uuid())
+  senderName   String?
+  senderEmail  String?
+  senderPhone  String?
+  totalViews   Int?
+  messageTitle String?
+  message      String?
+  status       MessageStatus @default(unread)
+  createdAt    DateTime      @default(now())
+}
+
 enum Role {
   systemAdmin
   admin
@@ -41,4 +53,9 @@ enum Status {
   active
   inactive
   deleted
+}
+
+enum MessageStatus {
+  read
+  unread
 }

@@ -7,6 +7,7 @@ import { AuthModule } from "./auth/auth.module";
 import { PrismaService } from "./prisma/prisma.service";
 import { AuthFinder } from "./auth/authFinder.service";
 import { ResponseInterceptor } from "./filter/respone.service";
+import { ContactListModule } from "./modules/contact-list/contact-list.module";
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { ResponseInterceptor } from "./filter/respone.service";
       envFilePath: ".env",
     }),
     AuthModule,
+    ContactListModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService, AuthFinder, ResponseInterceptor],

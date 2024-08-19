@@ -18,6 +18,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  * 
  */
 export type AppUsers = $Result.DefaultSelection<Prisma.$AppUsersPayload>
+/**
+ * Model ContactList
+ * 
+ */
+export type ContactList = $Result.DefaultSelection<Prisma.$ContactListPayload>
 
 /**
  * Enums
@@ -40,6 +45,14 @@ export const Status: {
 
 export type Status = (typeof Status)[keyof typeof Status]
 
+
+export const MessageStatus: {
+  read: 'read',
+  unread: 'unread'
+};
+
+export type MessageStatus = (typeof MessageStatus)[keyof typeof MessageStatus]
+
 }
 
 export type Role = $Enums.Role
@@ -49,6 +62,10 @@ export const Role: typeof $Enums.Role
 export type Status = $Enums.Status
 
 export const Status: typeof $Enums.Status
+
+export type MessageStatus = $Enums.MessageStatus
+
+export const MessageStatus: typeof $Enums.MessageStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -181,6 +198,16 @@ export class PrismaClient<
     * ```
     */
   get appUsers(): Prisma.AppUsersDelegate<ExtArgs>;
+
+  /**
+   * `prisma.contactList`: Exposes CRUD operations for the **ContactList** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ContactLists
+    * const contactLists = await prisma.contactList.findMany()
+    * ```
+    */
+  get contactList(): Prisma.ContactListDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -658,7 +685,8 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    AppUsers: 'AppUsers'
+    AppUsers: 'AppUsers',
+    ContactList: 'ContactList'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -675,7 +703,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'appUsers'
+      modelProps: 'appUsers' | 'contactList'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -746,6 +774,76 @@ export namespace Prisma {
           count: {
             args: Prisma.AppUsersCountArgs<ExtArgs>,
             result: $Utils.Optional<AppUsersCountAggregateOutputType> | number
+          }
+        }
+      }
+      ContactList: {
+        payload: Prisma.$ContactListPayload<ExtArgs>
+        fields: Prisma.ContactListFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ContactListFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ContactListPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ContactListFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ContactListPayload>
+          }
+          findFirst: {
+            args: Prisma.ContactListFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ContactListPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ContactListFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ContactListPayload>
+          }
+          findMany: {
+            args: Prisma.ContactListFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ContactListPayload>[]
+          }
+          create: {
+            args: Prisma.ContactListCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ContactListPayload>
+          }
+          createMany: {
+            args: Prisma.ContactListCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ContactListCreateManyAndReturnArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ContactListPayload>[]
+          }
+          delete: {
+            args: Prisma.ContactListDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ContactListPayload>
+          }
+          update: {
+            args: Prisma.ContactListUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ContactListPayload>
+          }
+          deleteMany: {
+            args: Prisma.ContactListDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ContactListUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.ContactListUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ContactListPayload>
+          }
+          aggregate: {
+            args: Prisma.ContactListAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateContactList>
+          }
+          groupBy: {
+            args: Prisma.ContactListGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<ContactListGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ContactListCountArgs<ExtArgs>,
+            result: $Utils.Optional<ContactListCountAggregateOutputType> | number
           }
         }
       }
@@ -1922,6 +2020,992 @@ export namespace Prisma {
 
 
   /**
+   * Model ContactList
+   */
+
+  export type AggregateContactList = {
+    _count: ContactListCountAggregateOutputType | null
+    _avg: ContactListAvgAggregateOutputType | null
+    _sum: ContactListSumAggregateOutputType | null
+    _min: ContactListMinAggregateOutputType | null
+    _max: ContactListMaxAggregateOutputType | null
+  }
+
+  export type ContactListAvgAggregateOutputType = {
+    totalViews: number | null
+  }
+
+  export type ContactListSumAggregateOutputType = {
+    totalViews: number | null
+  }
+
+  export type ContactListMinAggregateOutputType = {
+    id: string | null
+    senderName: string | null
+    senderEmail: string | null
+    senderPhone: string | null
+    totalViews: number | null
+    messageTitle: string | null
+    message: string | null
+    status: $Enums.MessageStatus | null
+    createdAt: Date | null
+  }
+
+  export type ContactListMaxAggregateOutputType = {
+    id: string | null
+    senderName: string | null
+    senderEmail: string | null
+    senderPhone: string | null
+    totalViews: number | null
+    messageTitle: string | null
+    message: string | null
+    status: $Enums.MessageStatus | null
+    createdAt: Date | null
+  }
+
+  export type ContactListCountAggregateOutputType = {
+    id: number
+    senderName: number
+    senderEmail: number
+    senderPhone: number
+    totalViews: number
+    messageTitle: number
+    message: number
+    status: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type ContactListAvgAggregateInputType = {
+    totalViews?: true
+  }
+
+  export type ContactListSumAggregateInputType = {
+    totalViews?: true
+  }
+
+  export type ContactListMinAggregateInputType = {
+    id?: true
+    senderName?: true
+    senderEmail?: true
+    senderPhone?: true
+    totalViews?: true
+    messageTitle?: true
+    message?: true
+    status?: true
+    createdAt?: true
+  }
+
+  export type ContactListMaxAggregateInputType = {
+    id?: true
+    senderName?: true
+    senderEmail?: true
+    senderPhone?: true
+    totalViews?: true
+    messageTitle?: true
+    message?: true
+    status?: true
+    createdAt?: true
+  }
+
+  export type ContactListCountAggregateInputType = {
+    id?: true
+    senderName?: true
+    senderEmail?: true
+    senderPhone?: true
+    totalViews?: true
+    messageTitle?: true
+    message?: true
+    status?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type ContactListAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContactList to aggregate.
+     */
+    where?: ContactListWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContactLists to fetch.
+     */
+    orderBy?: ContactListOrderByWithRelationInput | ContactListOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ContactListWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContactLists from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContactLists.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ContactLists
+    **/
+    _count?: true | ContactListCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ContactListAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ContactListSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ContactListMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ContactListMaxAggregateInputType
+  }
+
+  export type GetContactListAggregateType<T extends ContactListAggregateArgs> = {
+        [P in keyof T & keyof AggregateContactList]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateContactList[P]>
+      : GetScalarType<T[P], AggregateContactList[P]>
+  }
+
+
+
+
+  export type ContactListGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContactListWhereInput
+    orderBy?: ContactListOrderByWithAggregationInput | ContactListOrderByWithAggregationInput[]
+    by: ContactListScalarFieldEnum[] | ContactListScalarFieldEnum
+    having?: ContactListScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ContactListCountAggregateInputType | true
+    _avg?: ContactListAvgAggregateInputType
+    _sum?: ContactListSumAggregateInputType
+    _min?: ContactListMinAggregateInputType
+    _max?: ContactListMaxAggregateInputType
+  }
+
+  export type ContactListGroupByOutputType = {
+    id: string
+    senderName: string | null
+    senderEmail: string | null
+    senderPhone: string | null
+    totalViews: number | null
+    messageTitle: string | null
+    message: string | null
+    status: $Enums.MessageStatus
+    createdAt: Date
+    _count: ContactListCountAggregateOutputType | null
+    _avg: ContactListAvgAggregateOutputType | null
+    _sum: ContactListSumAggregateOutputType | null
+    _min: ContactListMinAggregateOutputType | null
+    _max: ContactListMaxAggregateOutputType | null
+  }
+
+  type GetContactListGroupByPayload<T extends ContactListGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ContactListGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ContactListGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ContactListGroupByOutputType[P]>
+            : GetScalarType<T[P], ContactListGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ContactListSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    senderName?: boolean
+    senderEmail?: boolean
+    senderPhone?: boolean
+    totalViews?: boolean
+    messageTitle?: boolean
+    message?: boolean
+    status?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["contactList"]>
+
+  export type ContactListSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    senderName?: boolean
+    senderEmail?: boolean
+    senderPhone?: boolean
+    totalViews?: boolean
+    messageTitle?: boolean
+    message?: boolean
+    status?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["contactList"]>
+
+  export type ContactListSelectScalar = {
+    id?: boolean
+    senderName?: boolean
+    senderEmail?: boolean
+    senderPhone?: boolean
+    totalViews?: boolean
+    messageTitle?: boolean
+    message?: boolean
+    status?: boolean
+    createdAt?: boolean
+  }
+
+
+  export type $ContactListPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ContactList"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      senderName: string | null
+      senderEmail: string | null
+      senderPhone: string | null
+      totalViews: number | null
+      messageTitle: string | null
+      message: string | null
+      status: $Enums.MessageStatus
+      createdAt: Date
+    }, ExtArgs["result"]["contactList"]>
+    composites: {}
+  }
+
+  type ContactListGetPayload<S extends boolean | null | undefined | ContactListDefaultArgs> = $Result.GetResult<Prisma.$ContactListPayload, S>
+
+  type ContactListCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<ContactListFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: ContactListCountAggregateInputType | true
+    }
+
+  export interface ContactListDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ContactList'], meta: { name: 'ContactList' } }
+    /**
+     * Find zero or one ContactList that matches the filter.
+     * @param {ContactListFindUniqueArgs} args - Arguments to find a ContactList
+     * @example
+     * // Get one ContactList
+     * const contactList = await prisma.contactList.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends ContactListFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, ContactListFindUniqueArgs<ExtArgs>>
+    ): Prisma__ContactListClient<$Result.GetResult<Prisma.$ContactListPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one ContactList that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {ContactListFindUniqueOrThrowArgs} args - Arguments to find a ContactList
+     * @example
+     * // Get one ContactList
+     * const contactList = await prisma.contactList.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends ContactListFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, ContactListFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__ContactListClient<$Result.GetResult<Prisma.$ContactListPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first ContactList that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactListFindFirstArgs} args - Arguments to find a ContactList
+     * @example
+     * // Get one ContactList
+     * const contactList = await prisma.contactList.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends ContactListFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, ContactListFindFirstArgs<ExtArgs>>
+    ): Prisma__ContactListClient<$Result.GetResult<Prisma.$ContactListPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first ContactList that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactListFindFirstOrThrowArgs} args - Arguments to find a ContactList
+     * @example
+     * // Get one ContactList
+     * const contactList = await prisma.contactList.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends ContactListFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, ContactListFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__ContactListClient<$Result.GetResult<Prisma.$ContactListPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more ContactLists that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactListFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ContactLists
+     * const contactLists = await prisma.contactList.findMany()
+     * 
+     * // Get first 10 ContactLists
+     * const contactLists = await prisma.contactList.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const contactListWithIdOnly = await prisma.contactList.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends ContactListFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ContactListFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactListPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a ContactList.
+     * @param {ContactListCreateArgs} args - Arguments to create a ContactList.
+     * @example
+     * // Create one ContactList
+     * const ContactList = await prisma.contactList.create({
+     *   data: {
+     *     // ... data to create a ContactList
+     *   }
+     * })
+     * 
+    **/
+    create<T extends ContactListCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, ContactListCreateArgs<ExtArgs>>
+    ): Prisma__ContactListClient<$Result.GetResult<Prisma.$ContactListPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many ContactLists.
+     * @param {ContactListCreateManyArgs} args - Arguments to create many ContactLists.
+     * @example
+     * // Create many ContactLists
+     * const contactList = await prisma.contactList.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+    **/
+    createMany<T extends ContactListCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ContactListCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ContactLists and returns the data saved in the database.
+     * @param {ContactListCreateManyAndReturnArgs} args - Arguments to create many ContactLists.
+     * @example
+     * // Create many ContactLists
+     * const contactList = await prisma.contactList.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ContactLists and only return the `id`
+     * const contactListWithIdOnly = await prisma.contactList.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+    **/
+    createManyAndReturn<T extends ContactListCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, ContactListCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactListPayload<ExtArgs>, T, 'createManyAndReturn'>>
+
+    /**
+     * Delete a ContactList.
+     * @param {ContactListDeleteArgs} args - Arguments to delete one ContactList.
+     * @example
+     * // Delete one ContactList
+     * const ContactList = await prisma.contactList.delete({
+     *   where: {
+     *     // ... filter to delete one ContactList
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends ContactListDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, ContactListDeleteArgs<ExtArgs>>
+    ): Prisma__ContactListClient<$Result.GetResult<Prisma.$ContactListPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one ContactList.
+     * @param {ContactListUpdateArgs} args - Arguments to update one ContactList.
+     * @example
+     * // Update one ContactList
+     * const contactList = await prisma.contactList.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends ContactListUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, ContactListUpdateArgs<ExtArgs>>
+    ): Prisma__ContactListClient<$Result.GetResult<Prisma.$ContactListPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more ContactLists.
+     * @param {ContactListDeleteManyArgs} args - Arguments to filter ContactLists to delete.
+     * @example
+     * // Delete a few ContactLists
+     * const { count } = await prisma.contactList.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends ContactListDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ContactListDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContactLists.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactListUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ContactLists
+     * const contactList = await prisma.contactList.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends ContactListUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, ContactListUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ContactList.
+     * @param {ContactListUpsertArgs} args - Arguments to update or create a ContactList.
+     * @example
+     * // Update or create a ContactList
+     * const contactList = await prisma.contactList.upsert({
+     *   create: {
+     *     // ... data to create a ContactList
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ContactList we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends ContactListUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, ContactListUpsertArgs<ExtArgs>>
+    ): Prisma__ContactListClient<$Result.GetResult<Prisma.$ContactListPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of ContactLists.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactListCountArgs} args - Arguments to filter ContactLists to count.
+     * @example
+     * // Count the number of ContactLists
+     * const count = await prisma.contactList.count({
+     *   where: {
+     *     // ... the filter for the ContactLists we want to count
+     *   }
+     * })
+    **/
+    count<T extends ContactListCountArgs>(
+      args?: Subset<T, ContactListCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ContactListCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ContactList.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactListAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ContactListAggregateArgs>(args: Subset<T, ContactListAggregateArgs>): Prisma.PrismaPromise<GetContactListAggregateType<T>>
+
+    /**
+     * Group by ContactList.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactListGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ContactListGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ContactListGroupByArgs['orderBy'] }
+        : { orderBy?: ContactListGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ContactListGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContactListGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ContactList model
+   */
+  readonly fields: ContactListFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ContactList.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ContactListClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the ContactList model
+   */ 
+  interface ContactListFieldRefs {
+    readonly id: FieldRef<"ContactList", 'String'>
+    readonly senderName: FieldRef<"ContactList", 'String'>
+    readonly senderEmail: FieldRef<"ContactList", 'String'>
+    readonly senderPhone: FieldRef<"ContactList", 'String'>
+    readonly totalViews: FieldRef<"ContactList", 'Int'>
+    readonly messageTitle: FieldRef<"ContactList", 'String'>
+    readonly message: FieldRef<"ContactList", 'String'>
+    readonly status: FieldRef<"ContactList", 'MessageStatus'>
+    readonly createdAt: FieldRef<"ContactList", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ContactList findUnique
+   */
+  export type ContactListFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactList
+     */
+    select?: ContactListSelect<ExtArgs> | null
+    /**
+     * Filter, which ContactList to fetch.
+     */
+    where: ContactListWhereUniqueInput
+  }
+
+  /**
+   * ContactList findUniqueOrThrow
+   */
+  export type ContactListFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactList
+     */
+    select?: ContactListSelect<ExtArgs> | null
+    /**
+     * Filter, which ContactList to fetch.
+     */
+    where: ContactListWhereUniqueInput
+  }
+
+  /**
+   * ContactList findFirst
+   */
+  export type ContactListFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactList
+     */
+    select?: ContactListSelect<ExtArgs> | null
+    /**
+     * Filter, which ContactList to fetch.
+     */
+    where?: ContactListWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContactLists to fetch.
+     */
+    orderBy?: ContactListOrderByWithRelationInput | ContactListOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContactLists.
+     */
+    cursor?: ContactListWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContactLists from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContactLists.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContactLists.
+     */
+    distinct?: ContactListScalarFieldEnum | ContactListScalarFieldEnum[]
+  }
+
+  /**
+   * ContactList findFirstOrThrow
+   */
+  export type ContactListFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactList
+     */
+    select?: ContactListSelect<ExtArgs> | null
+    /**
+     * Filter, which ContactList to fetch.
+     */
+    where?: ContactListWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContactLists to fetch.
+     */
+    orderBy?: ContactListOrderByWithRelationInput | ContactListOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContactLists.
+     */
+    cursor?: ContactListWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContactLists from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContactLists.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContactLists.
+     */
+    distinct?: ContactListScalarFieldEnum | ContactListScalarFieldEnum[]
+  }
+
+  /**
+   * ContactList findMany
+   */
+  export type ContactListFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactList
+     */
+    select?: ContactListSelect<ExtArgs> | null
+    /**
+     * Filter, which ContactLists to fetch.
+     */
+    where?: ContactListWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContactLists to fetch.
+     */
+    orderBy?: ContactListOrderByWithRelationInput | ContactListOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ContactLists.
+     */
+    cursor?: ContactListWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContactLists from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContactLists.
+     */
+    skip?: number
+    distinct?: ContactListScalarFieldEnum | ContactListScalarFieldEnum[]
+  }
+
+  /**
+   * ContactList create
+   */
+  export type ContactListCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactList
+     */
+    select?: ContactListSelect<ExtArgs> | null
+    /**
+     * The data needed to create a ContactList.
+     */
+    data?: XOR<ContactListCreateInput, ContactListUncheckedCreateInput>
+  }
+
+  /**
+   * ContactList createMany
+   */
+  export type ContactListCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ContactLists.
+     */
+    data: ContactListCreateManyInput | ContactListCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ContactList createManyAndReturn
+   */
+  export type ContactListCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactList
+     */
+    select?: ContactListSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many ContactLists.
+     */
+    data: ContactListCreateManyInput | ContactListCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ContactList update
+   */
+  export type ContactListUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactList
+     */
+    select?: ContactListSelect<ExtArgs> | null
+    /**
+     * The data needed to update a ContactList.
+     */
+    data: XOR<ContactListUpdateInput, ContactListUncheckedUpdateInput>
+    /**
+     * Choose, which ContactList to update.
+     */
+    where: ContactListWhereUniqueInput
+  }
+
+  /**
+   * ContactList updateMany
+   */
+  export type ContactListUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ContactLists.
+     */
+    data: XOR<ContactListUpdateManyMutationInput, ContactListUncheckedUpdateManyInput>
+    /**
+     * Filter which ContactLists to update
+     */
+    where?: ContactListWhereInput
+  }
+
+  /**
+   * ContactList upsert
+   */
+  export type ContactListUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactList
+     */
+    select?: ContactListSelect<ExtArgs> | null
+    /**
+     * The filter to search for the ContactList to update in case it exists.
+     */
+    where: ContactListWhereUniqueInput
+    /**
+     * In case the ContactList found by the `where` argument doesn't exist, create a new ContactList with this data.
+     */
+    create: XOR<ContactListCreateInput, ContactListUncheckedCreateInput>
+    /**
+     * In case the ContactList was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ContactListUpdateInput, ContactListUncheckedUpdateInput>
+  }
+
+  /**
+   * ContactList delete
+   */
+  export type ContactListDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactList
+     */
+    select?: ContactListSelect<ExtArgs> | null
+    /**
+     * Filter which ContactList to delete.
+     */
+    where: ContactListWhereUniqueInput
+  }
+
+  /**
+   * ContactList deleteMany
+   */
+  export type ContactListDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContactLists to delete
+     */
+    where?: ContactListWhereInput
+  }
+
+  /**
+   * ContactList without action
+   */
+  export type ContactListDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactList
+     */
+    select?: ContactListSelect<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -1953,6 +3037,21 @@ export namespace Prisma {
   };
 
   export type AppUsersScalarFieldEnum = (typeof AppUsersScalarFieldEnum)[keyof typeof AppUsersScalarFieldEnum]
+
+
+  export const ContactListScalarFieldEnum: {
+    id: 'id',
+    senderName: 'senderName',
+    senderEmail: 'senderEmail',
+    senderPhone: 'senderPhone',
+    totalViews: 'totalViews',
+    messageTitle: 'messageTitle',
+    message: 'message',
+    status: 'status',
+    createdAt: 'createdAt'
+  };
+
+  export type ContactListScalarFieldEnum = (typeof ContactListScalarFieldEnum)[keyof typeof ContactListScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -2059,6 +3158,34 @@ export namespace Prisma {
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
+
+
+  /**
+   * Reference to a field of type 'MessageStatus'
+   */
+  export type EnumMessageStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MessageStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'MessageStatus[]'
+   */
+  export type ListEnumMessageStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MessageStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
   /**
    * Deep Input Types
    */
@@ -2159,6 +3286,80 @@ export namespace Prisma {
     createdAt?: DateTimeNullableWithAggregatesFilter<"AppUsers"> | Date | string | null
     updatedAt?: DateTimeNullableWithAggregatesFilter<"AppUsers"> | Date | string | null
     lastLogin?: DateTimeNullableWithAggregatesFilter<"AppUsers"> | Date | string | null
+  }
+
+  export type ContactListWhereInput = {
+    AND?: ContactListWhereInput | ContactListWhereInput[]
+    OR?: ContactListWhereInput[]
+    NOT?: ContactListWhereInput | ContactListWhereInput[]
+    id?: StringFilter<"ContactList"> | string
+    senderName?: StringNullableFilter<"ContactList"> | string | null
+    senderEmail?: StringNullableFilter<"ContactList"> | string | null
+    senderPhone?: StringNullableFilter<"ContactList"> | string | null
+    totalViews?: IntNullableFilter<"ContactList"> | number | null
+    messageTitle?: StringNullableFilter<"ContactList"> | string | null
+    message?: StringNullableFilter<"ContactList"> | string | null
+    status?: EnumMessageStatusFilter<"ContactList"> | $Enums.MessageStatus
+    createdAt?: DateTimeFilter<"ContactList"> | Date | string
+  }
+
+  export type ContactListOrderByWithRelationInput = {
+    id?: SortOrder
+    senderName?: SortOrderInput | SortOrder
+    senderEmail?: SortOrderInput | SortOrder
+    senderPhone?: SortOrderInput | SortOrder
+    totalViews?: SortOrderInput | SortOrder
+    messageTitle?: SortOrderInput | SortOrder
+    message?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ContactListWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ContactListWhereInput | ContactListWhereInput[]
+    OR?: ContactListWhereInput[]
+    NOT?: ContactListWhereInput | ContactListWhereInput[]
+    senderName?: StringNullableFilter<"ContactList"> | string | null
+    senderEmail?: StringNullableFilter<"ContactList"> | string | null
+    senderPhone?: StringNullableFilter<"ContactList"> | string | null
+    totalViews?: IntNullableFilter<"ContactList"> | number | null
+    messageTitle?: StringNullableFilter<"ContactList"> | string | null
+    message?: StringNullableFilter<"ContactList"> | string | null
+    status?: EnumMessageStatusFilter<"ContactList"> | $Enums.MessageStatus
+    createdAt?: DateTimeFilter<"ContactList"> | Date | string
+  }, "id" | "id">
+
+  export type ContactListOrderByWithAggregationInput = {
+    id?: SortOrder
+    senderName?: SortOrderInput | SortOrder
+    senderEmail?: SortOrderInput | SortOrder
+    senderPhone?: SortOrderInput | SortOrder
+    totalViews?: SortOrderInput | SortOrder
+    messageTitle?: SortOrderInput | SortOrder
+    message?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    _count?: ContactListCountOrderByAggregateInput
+    _avg?: ContactListAvgOrderByAggregateInput
+    _max?: ContactListMaxOrderByAggregateInput
+    _min?: ContactListMinOrderByAggregateInput
+    _sum?: ContactListSumOrderByAggregateInput
+  }
+
+  export type ContactListScalarWhereWithAggregatesInput = {
+    AND?: ContactListScalarWhereWithAggregatesInput | ContactListScalarWhereWithAggregatesInput[]
+    OR?: ContactListScalarWhereWithAggregatesInput[]
+    NOT?: ContactListScalarWhereWithAggregatesInput | ContactListScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ContactList"> | string
+    senderName?: StringNullableWithAggregatesFilter<"ContactList"> | string | null
+    senderEmail?: StringNullableWithAggregatesFilter<"ContactList"> | string | null
+    senderPhone?: StringNullableWithAggregatesFilter<"ContactList"> | string | null
+    totalViews?: IntNullableWithAggregatesFilter<"ContactList"> | number | null
+    messageTitle?: StringNullableWithAggregatesFilter<"ContactList"> | string | null
+    message?: StringNullableWithAggregatesFilter<"ContactList"> | string | null
+    status?: EnumMessageStatusWithAggregatesFilter<"ContactList"> | $Enums.MessageStatus
+    createdAt?: DateTimeWithAggregatesFilter<"ContactList"> | Date | string
   }
 
   export type AppUsersCreateInput = {
@@ -2278,6 +3479,90 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type ContactListCreateInput = {
+    id?: string
+    senderName?: string | null
+    senderEmail?: string | null
+    senderPhone?: string | null
+    totalViews?: number | null
+    messageTitle?: string | null
+    message?: string | null
+    status?: $Enums.MessageStatus
+    createdAt?: Date | string
+  }
+
+  export type ContactListUncheckedCreateInput = {
+    id?: string
+    senderName?: string | null
+    senderEmail?: string | null
+    senderPhone?: string | null
+    totalViews?: number | null
+    messageTitle?: string | null
+    message?: string | null
+    status?: $Enums.MessageStatus
+    createdAt?: Date | string
+  }
+
+  export type ContactListUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderName?: NullableStringFieldUpdateOperationsInput | string | null
+    senderEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    senderPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    totalViews?: NullableIntFieldUpdateOperationsInput | number | null
+    messageTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumMessageStatusFieldUpdateOperationsInput | $Enums.MessageStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContactListUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderName?: NullableStringFieldUpdateOperationsInput | string | null
+    senderEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    senderPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    totalViews?: NullableIntFieldUpdateOperationsInput | number | null
+    messageTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumMessageStatusFieldUpdateOperationsInput | $Enums.MessageStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContactListCreateManyInput = {
+    id?: string
+    senderName?: string | null
+    senderEmail?: string | null
+    senderPhone?: string | null
+    totalViews?: number | null
+    messageTitle?: string | null
+    message?: string | null
+    status?: $Enums.MessageStatus
+    createdAt?: Date | string
+  }
+
+  export type ContactListUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderName?: NullableStringFieldUpdateOperationsInput | string | null
+    senderEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    senderPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    totalViews?: NullableIntFieldUpdateOperationsInput | number | null
+    messageTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumMessageStatusFieldUpdateOperationsInput | $Enums.MessageStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContactListUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    senderName?: NullableStringFieldUpdateOperationsInput | string | null
+    senderEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    senderPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    totalViews?: NullableIntFieldUpdateOperationsInput | number | null
+    messageTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumMessageStatusFieldUpdateOperationsInput | $Enums.MessageStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -2474,6 +3759,119 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type EnumMessageStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageStatus | EnumMessageStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageStatus[] | ListEnumMessageStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageStatus[] | ListEnumMessageStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageStatusFilter<$PrismaModel> | $Enums.MessageStatus
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type ContactListCountOrderByAggregateInput = {
+    id?: SortOrder
+    senderName?: SortOrder
+    senderEmail?: SortOrder
+    senderPhone?: SortOrder
+    totalViews?: SortOrder
+    messageTitle?: SortOrder
+    message?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ContactListAvgOrderByAggregateInput = {
+    totalViews?: SortOrder
+  }
+
+  export type ContactListMaxOrderByAggregateInput = {
+    id?: SortOrder
+    senderName?: SortOrder
+    senderEmail?: SortOrder
+    senderPhone?: SortOrder
+    totalViews?: SortOrder
+    messageTitle?: SortOrder
+    message?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ContactListMinOrderByAggregateInput = {
+    id?: SortOrder
+    senderName?: SortOrder
+    senderEmail?: SortOrder
+    senderPhone?: SortOrder
+    totalViews?: SortOrder
+    messageTitle?: SortOrder
+    message?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ContactListSumOrderByAggregateInput = {
+    totalViews?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type EnumMessageStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageStatus | EnumMessageStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageStatus[] | ListEnumMessageStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageStatus[] | ListEnumMessageStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageStatusWithAggregatesFilter<$PrismaModel> | $Enums.MessageStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMessageStatusFilter<$PrismaModel>
+    _max?: NestedEnumMessageStatusFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -2496,6 +3894,22 @@ export namespace Prisma {
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type EnumMessageStatusFieldUpdateOperationsInput = {
+    set?: $Enums.MessageStatus
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -2654,6 +4068,75 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumMessageStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageStatus | EnumMessageStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageStatus[] | ListEnumMessageStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageStatus[] | ListEnumMessageStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageStatusFilter<$PrismaModel> | $Enums.MessageStatus
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumMessageStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageStatus | EnumMessageStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageStatus[] | ListEnumMessageStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageStatus[] | ListEnumMessageStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageStatusWithAggregatesFilter<$PrismaModel> | $Enums.MessageStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMessageStatusFilter<$PrismaModel>
+    _max?: NestedEnumMessageStatusFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
 
 
   /**
@@ -2663,6 +4146,10 @@ export namespace Prisma {
      * @deprecated Use AppUsersDefaultArgs instead
      */
     export type AppUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = AppUsersDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use ContactListDefaultArgs instead
+     */
+    export type ContactListArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ContactListDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany
