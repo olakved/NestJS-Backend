@@ -148,6 +148,14 @@ exports.Prisma.ContactListScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.NamingListScalarFieldEnum = {
+  id: 'id',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  phone: 'phone',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -181,7 +189,8 @@ exports.MessageStatus = exports.$Enums.MessageStatus = {
 
 exports.Prisma.ModelName = {
   AppUsers: 'AppUsers',
-  ContactList: 'ContactList'
+  ContactList: 'ContactList',
+  namingList: 'namingList'
 };
 
 /**

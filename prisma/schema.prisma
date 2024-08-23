@@ -43,6 +43,14 @@ model ContactList {
   createdAt    DateTime      @default(now())
 }
 
+model namingList {
+  id        String   @id @unique @default(uuid())
+  firstName String?
+  lastName  String?
+  phone     String?  @unique
+  createdAt DateTime @default(now())
+}
+
 enum Role {
   systemAdmin
   admin

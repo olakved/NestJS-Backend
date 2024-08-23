@@ -23,6 +23,11 @@ export type AppUsers = $Result.DefaultSelection<Prisma.$AppUsersPayload>
  * 
  */
 export type ContactList = $Result.DefaultSelection<Prisma.$ContactListPayload>
+/**
+ * Model namingList
+ * 
+ */
+export type namingList = $Result.DefaultSelection<Prisma.$namingListPayload>
 
 /**
  * Enums
@@ -208,6 +213,16 @@ export class PrismaClient<
     * ```
     */
   get contactList(): Prisma.ContactListDelegate<ExtArgs>;
+
+  /**
+   * `prisma.namingList`: Exposes CRUD operations for the **namingList** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more NamingLists
+    * const namingLists = await prisma.namingList.findMany()
+    * ```
+    */
+  get namingList(): Prisma.namingListDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -686,7 +701,8 @@ export namespace Prisma {
 
   export const ModelName: {
     AppUsers: 'AppUsers',
-    ContactList: 'ContactList'
+    ContactList: 'ContactList',
+    namingList: 'namingList'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -703,7 +719,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'appUsers' | 'contactList'
+      modelProps: 'appUsers' | 'contactList' | 'namingList'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -844,6 +860,76 @@ export namespace Prisma {
           count: {
             args: Prisma.ContactListCountArgs<ExtArgs>,
             result: $Utils.Optional<ContactListCountAggregateOutputType> | number
+          }
+        }
+      }
+      namingList: {
+        payload: Prisma.$namingListPayload<ExtArgs>
+        fields: Prisma.namingListFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.namingListFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$namingListPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.namingListFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$namingListPayload>
+          }
+          findFirst: {
+            args: Prisma.namingListFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$namingListPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.namingListFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$namingListPayload>
+          }
+          findMany: {
+            args: Prisma.namingListFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$namingListPayload>[]
+          }
+          create: {
+            args: Prisma.namingListCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$namingListPayload>
+          }
+          createMany: {
+            args: Prisma.namingListCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.namingListCreateManyAndReturnArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$namingListPayload>[]
+          }
+          delete: {
+            args: Prisma.namingListDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$namingListPayload>
+          }
+          update: {
+            args: Prisma.namingListUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$namingListPayload>
+          }
+          deleteMany: {
+            args: Prisma.namingListDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.namingListUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.namingListUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$namingListPayload>
+          }
+          aggregate: {
+            args: Prisma.NamingListAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateNamingList>
+          }
+          groupBy: {
+            args: Prisma.namingListGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<NamingListGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.namingListCountArgs<ExtArgs>,
+            result: $Utils.Optional<NamingListCountAggregateOutputType> | number
           }
         }
       }
@@ -3006,6 +3092,910 @@ export namespace Prisma {
 
 
   /**
+   * Model namingList
+   */
+
+  export type AggregateNamingList = {
+    _count: NamingListCountAggregateOutputType | null
+    _min: NamingListMinAggregateOutputType | null
+    _max: NamingListMaxAggregateOutputType | null
+  }
+
+  export type NamingListMinAggregateOutputType = {
+    id: string | null
+    firstName: string | null
+    lastName: string | null
+    phone: string | null
+    createdAt: Date | null
+  }
+
+  export type NamingListMaxAggregateOutputType = {
+    id: string | null
+    firstName: string | null
+    lastName: string | null
+    phone: string | null
+    createdAt: Date | null
+  }
+
+  export type NamingListCountAggregateOutputType = {
+    id: number
+    firstName: number
+    lastName: number
+    phone: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type NamingListMinAggregateInputType = {
+    id?: true
+    firstName?: true
+    lastName?: true
+    phone?: true
+    createdAt?: true
+  }
+
+  export type NamingListMaxAggregateInputType = {
+    id?: true
+    firstName?: true
+    lastName?: true
+    phone?: true
+    createdAt?: true
+  }
+
+  export type NamingListCountAggregateInputType = {
+    id?: true
+    firstName?: true
+    lastName?: true
+    phone?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type NamingListAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which namingList to aggregate.
+     */
+    where?: namingListWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of namingLists to fetch.
+     */
+    orderBy?: namingListOrderByWithRelationInput | namingListOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: namingListWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` namingLists from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` namingLists.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned namingLists
+    **/
+    _count?: true | NamingListCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NamingListMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NamingListMaxAggregateInputType
+  }
+
+  export type GetNamingListAggregateType<T extends NamingListAggregateArgs> = {
+        [P in keyof T & keyof AggregateNamingList]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNamingList[P]>
+      : GetScalarType<T[P], AggregateNamingList[P]>
+  }
+
+
+
+
+  export type namingListGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: namingListWhereInput
+    orderBy?: namingListOrderByWithAggregationInput | namingListOrderByWithAggregationInput[]
+    by: NamingListScalarFieldEnum[] | NamingListScalarFieldEnum
+    having?: namingListScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NamingListCountAggregateInputType | true
+    _min?: NamingListMinAggregateInputType
+    _max?: NamingListMaxAggregateInputType
+  }
+
+  export type NamingListGroupByOutputType = {
+    id: string
+    firstName: string | null
+    lastName: string | null
+    phone: string | null
+    createdAt: Date
+    _count: NamingListCountAggregateOutputType | null
+    _min: NamingListMinAggregateOutputType | null
+    _max: NamingListMaxAggregateOutputType | null
+  }
+
+  type GetNamingListGroupByPayload<T extends namingListGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NamingListGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NamingListGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NamingListGroupByOutputType[P]>
+            : GetScalarType<T[P], NamingListGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type namingListSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    phone?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["namingList"]>
+
+  export type namingListSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    phone?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["namingList"]>
+
+  export type namingListSelectScalar = {
+    id?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    phone?: boolean
+    createdAt?: boolean
+  }
+
+
+  export type $namingListPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "namingList"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      firstName: string | null
+      lastName: string | null
+      phone: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["namingList"]>
+    composites: {}
+  }
+
+  type namingListGetPayload<S extends boolean | null | undefined | namingListDefaultArgs> = $Result.GetResult<Prisma.$namingListPayload, S>
+
+  type namingListCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<namingListFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: NamingListCountAggregateInputType | true
+    }
+
+  export interface namingListDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['namingList'], meta: { name: 'namingList' } }
+    /**
+     * Find zero or one NamingList that matches the filter.
+     * @param {namingListFindUniqueArgs} args - Arguments to find a NamingList
+     * @example
+     * // Get one NamingList
+     * const namingList = await prisma.namingList.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends namingListFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, namingListFindUniqueArgs<ExtArgs>>
+    ): Prisma__namingListClient<$Result.GetResult<Prisma.$namingListPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one NamingList that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {namingListFindUniqueOrThrowArgs} args - Arguments to find a NamingList
+     * @example
+     * // Get one NamingList
+     * const namingList = await prisma.namingList.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends namingListFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, namingListFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__namingListClient<$Result.GetResult<Prisma.$namingListPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first NamingList that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {namingListFindFirstArgs} args - Arguments to find a NamingList
+     * @example
+     * // Get one NamingList
+     * const namingList = await prisma.namingList.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends namingListFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, namingListFindFirstArgs<ExtArgs>>
+    ): Prisma__namingListClient<$Result.GetResult<Prisma.$namingListPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first NamingList that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {namingListFindFirstOrThrowArgs} args - Arguments to find a NamingList
+     * @example
+     * // Get one NamingList
+     * const namingList = await prisma.namingList.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends namingListFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, namingListFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__namingListClient<$Result.GetResult<Prisma.$namingListPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more NamingLists that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {namingListFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all NamingLists
+     * const namingLists = await prisma.namingList.findMany()
+     * 
+     * // Get first 10 NamingLists
+     * const namingLists = await prisma.namingList.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const namingListWithIdOnly = await prisma.namingList.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends namingListFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, namingListFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$namingListPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a NamingList.
+     * @param {namingListCreateArgs} args - Arguments to create a NamingList.
+     * @example
+     * // Create one NamingList
+     * const NamingList = await prisma.namingList.create({
+     *   data: {
+     *     // ... data to create a NamingList
+     *   }
+     * })
+     * 
+    **/
+    create<T extends namingListCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, namingListCreateArgs<ExtArgs>>
+    ): Prisma__namingListClient<$Result.GetResult<Prisma.$namingListPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many NamingLists.
+     * @param {namingListCreateManyArgs} args - Arguments to create many NamingLists.
+     * @example
+     * // Create many NamingLists
+     * const namingList = await prisma.namingList.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+    **/
+    createMany<T extends namingListCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, namingListCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many NamingLists and returns the data saved in the database.
+     * @param {namingListCreateManyAndReturnArgs} args - Arguments to create many NamingLists.
+     * @example
+     * // Create many NamingLists
+     * const namingList = await prisma.namingList.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many NamingLists and only return the `id`
+     * const namingListWithIdOnly = await prisma.namingList.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+    **/
+    createManyAndReturn<T extends namingListCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, namingListCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$namingListPayload<ExtArgs>, T, 'createManyAndReturn'>>
+
+    /**
+     * Delete a NamingList.
+     * @param {namingListDeleteArgs} args - Arguments to delete one NamingList.
+     * @example
+     * // Delete one NamingList
+     * const NamingList = await prisma.namingList.delete({
+     *   where: {
+     *     // ... filter to delete one NamingList
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends namingListDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, namingListDeleteArgs<ExtArgs>>
+    ): Prisma__namingListClient<$Result.GetResult<Prisma.$namingListPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one NamingList.
+     * @param {namingListUpdateArgs} args - Arguments to update one NamingList.
+     * @example
+     * // Update one NamingList
+     * const namingList = await prisma.namingList.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends namingListUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, namingListUpdateArgs<ExtArgs>>
+    ): Prisma__namingListClient<$Result.GetResult<Prisma.$namingListPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more NamingLists.
+     * @param {namingListDeleteManyArgs} args - Arguments to filter NamingLists to delete.
+     * @example
+     * // Delete a few NamingLists
+     * const { count } = await prisma.namingList.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends namingListDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, namingListDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NamingLists.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {namingListUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many NamingLists
+     * const namingList = await prisma.namingList.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends namingListUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, namingListUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one NamingList.
+     * @param {namingListUpsertArgs} args - Arguments to update or create a NamingList.
+     * @example
+     * // Update or create a NamingList
+     * const namingList = await prisma.namingList.upsert({
+     *   create: {
+     *     // ... data to create a NamingList
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the NamingList we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends namingListUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, namingListUpsertArgs<ExtArgs>>
+    ): Prisma__namingListClient<$Result.GetResult<Prisma.$namingListPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of NamingLists.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {namingListCountArgs} args - Arguments to filter NamingLists to count.
+     * @example
+     * // Count the number of NamingLists
+     * const count = await prisma.namingList.count({
+     *   where: {
+     *     // ... the filter for the NamingLists we want to count
+     *   }
+     * })
+    **/
+    count<T extends namingListCountArgs>(
+      args?: Subset<T, namingListCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NamingListCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a NamingList.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NamingListAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NamingListAggregateArgs>(args: Subset<T, NamingListAggregateArgs>): Prisma.PrismaPromise<GetNamingListAggregateType<T>>
+
+    /**
+     * Group by NamingList.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {namingListGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends namingListGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: namingListGroupByArgs['orderBy'] }
+        : { orderBy?: namingListGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, namingListGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNamingListGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the namingList model
+   */
+  readonly fields: namingListFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for namingList.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__namingListClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the namingList model
+   */ 
+  interface namingListFieldRefs {
+    readonly id: FieldRef<"namingList", 'String'>
+    readonly firstName: FieldRef<"namingList", 'String'>
+    readonly lastName: FieldRef<"namingList", 'String'>
+    readonly phone: FieldRef<"namingList", 'String'>
+    readonly createdAt: FieldRef<"namingList", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * namingList findUnique
+   */
+  export type namingListFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the namingList
+     */
+    select?: namingListSelect<ExtArgs> | null
+    /**
+     * Filter, which namingList to fetch.
+     */
+    where: namingListWhereUniqueInput
+  }
+
+  /**
+   * namingList findUniqueOrThrow
+   */
+  export type namingListFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the namingList
+     */
+    select?: namingListSelect<ExtArgs> | null
+    /**
+     * Filter, which namingList to fetch.
+     */
+    where: namingListWhereUniqueInput
+  }
+
+  /**
+   * namingList findFirst
+   */
+  export type namingListFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the namingList
+     */
+    select?: namingListSelect<ExtArgs> | null
+    /**
+     * Filter, which namingList to fetch.
+     */
+    where?: namingListWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of namingLists to fetch.
+     */
+    orderBy?: namingListOrderByWithRelationInput | namingListOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for namingLists.
+     */
+    cursor?: namingListWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` namingLists from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` namingLists.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of namingLists.
+     */
+    distinct?: NamingListScalarFieldEnum | NamingListScalarFieldEnum[]
+  }
+
+  /**
+   * namingList findFirstOrThrow
+   */
+  export type namingListFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the namingList
+     */
+    select?: namingListSelect<ExtArgs> | null
+    /**
+     * Filter, which namingList to fetch.
+     */
+    where?: namingListWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of namingLists to fetch.
+     */
+    orderBy?: namingListOrderByWithRelationInput | namingListOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for namingLists.
+     */
+    cursor?: namingListWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` namingLists from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` namingLists.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of namingLists.
+     */
+    distinct?: NamingListScalarFieldEnum | NamingListScalarFieldEnum[]
+  }
+
+  /**
+   * namingList findMany
+   */
+  export type namingListFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the namingList
+     */
+    select?: namingListSelect<ExtArgs> | null
+    /**
+     * Filter, which namingLists to fetch.
+     */
+    where?: namingListWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of namingLists to fetch.
+     */
+    orderBy?: namingListOrderByWithRelationInput | namingListOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing namingLists.
+     */
+    cursor?: namingListWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` namingLists from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` namingLists.
+     */
+    skip?: number
+    distinct?: NamingListScalarFieldEnum | NamingListScalarFieldEnum[]
+  }
+
+  /**
+   * namingList create
+   */
+  export type namingListCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the namingList
+     */
+    select?: namingListSelect<ExtArgs> | null
+    /**
+     * The data needed to create a namingList.
+     */
+    data?: XOR<namingListCreateInput, namingListUncheckedCreateInput>
+  }
+
+  /**
+   * namingList createMany
+   */
+  export type namingListCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many namingLists.
+     */
+    data: namingListCreateManyInput | namingListCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * namingList createManyAndReturn
+   */
+  export type namingListCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the namingList
+     */
+    select?: namingListSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many namingLists.
+     */
+    data: namingListCreateManyInput | namingListCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * namingList update
+   */
+  export type namingListUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the namingList
+     */
+    select?: namingListSelect<ExtArgs> | null
+    /**
+     * The data needed to update a namingList.
+     */
+    data: XOR<namingListUpdateInput, namingListUncheckedUpdateInput>
+    /**
+     * Choose, which namingList to update.
+     */
+    where: namingListWhereUniqueInput
+  }
+
+  /**
+   * namingList updateMany
+   */
+  export type namingListUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update namingLists.
+     */
+    data: XOR<namingListUpdateManyMutationInput, namingListUncheckedUpdateManyInput>
+    /**
+     * Filter which namingLists to update
+     */
+    where?: namingListWhereInput
+  }
+
+  /**
+   * namingList upsert
+   */
+  export type namingListUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the namingList
+     */
+    select?: namingListSelect<ExtArgs> | null
+    /**
+     * The filter to search for the namingList to update in case it exists.
+     */
+    where: namingListWhereUniqueInput
+    /**
+     * In case the namingList found by the `where` argument doesn't exist, create a new namingList with this data.
+     */
+    create: XOR<namingListCreateInput, namingListUncheckedCreateInput>
+    /**
+     * In case the namingList was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<namingListUpdateInput, namingListUncheckedUpdateInput>
+  }
+
+  /**
+   * namingList delete
+   */
+  export type namingListDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the namingList
+     */
+    select?: namingListSelect<ExtArgs> | null
+    /**
+     * Filter which namingList to delete.
+     */
+    where: namingListWhereUniqueInput
+  }
+
+  /**
+   * namingList deleteMany
+   */
+  export type namingListDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which namingLists to delete
+     */
+    where?: namingListWhereInput
+  }
+
+  /**
+   * namingList without action
+   */
+  export type namingListDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the namingList
+     */
+    select?: namingListSelect<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -3052,6 +4042,17 @@ export namespace Prisma {
   };
 
   export type ContactListScalarFieldEnum = (typeof ContactListScalarFieldEnum)[keyof typeof ContactListScalarFieldEnum]
+
+
+  export const NamingListScalarFieldEnum: {
+    id: 'id',
+    firstName: 'firstName',
+    lastName: 'lastName',
+    phone: 'phone',
+    createdAt: 'createdAt'
+  };
+
+  export type NamingListScalarFieldEnum = (typeof NamingListScalarFieldEnum)[keyof typeof NamingListScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -3362,6 +4363,58 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"ContactList"> | Date | string
   }
 
+  export type namingListWhereInput = {
+    AND?: namingListWhereInput | namingListWhereInput[]
+    OR?: namingListWhereInput[]
+    NOT?: namingListWhereInput | namingListWhereInput[]
+    id?: StringFilter<"namingList"> | string
+    firstName?: StringNullableFilter<"namingList"> | string | null
+    lastName?: StringNullableFilter<"namingList"> | string | null
+    phone?: StringNullableFilter<"namingList"> | string | null
+    createdAt?: DateTimeFilter<"namingList"> | Date | string
+  }
+
+  export type namingListOrderByWithRelationInput = {
+    id?: SortOrder
+    firstName?: SortOrderInput | SortOrder
+    lastName?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type namingListWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    phone?: string
+    AND?: namingListWhereInput | namingListWhereInput[]
+    OR?: namingListWhereInput[]
+    NOT?: namingListWhereInput | namingListWhereInput[]
+    firstName?: StringNullableFilter<"namingList"> | string | null
+    lastName?: StringNullableFilter<"namingList"> | string | null
+    createdAt?: DateTimeFilter<"namingList"> | Date | string
+  }, "id" | "id" | "phone">
+
+  export type namingListOrderByWithAggregationInput = {
+    id?: SortOrder
+    firstName?: SortOrderInput | SortOrder
+    lastName?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: namingListCountOrderByAggregateInput
+    _max?: namingListMaxOrderByAggregateInput
+    _min?: namingListMinOrderByAggregateInput
+  }
+
+  export type namingListScalarWhereWithAggregatesInput = {
+    AND?: namingListScalarWhereWithAggregatesInput | namingListScalarWhereWithAggregatesInput[]
+    OR?: namingListScalarWhereWithAggregatesInput[]
+    NOT?: namingListScalarWhereWithAggregatesInput | namingListScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"namingList"> | string
+    firstName?: StringNullableWithAggregatesFilter<"namingList"> | string | null
+    lastName?: StringNullableWithAggregatesFilter<"namingList"> | string | null
+    phone?: StringNullableWithAggregatesFilter<"namingList"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"namingList"> | Date | string
+  }
+
   export type AppUsersCreateInput = {
     id?: string
     firstname?: string | null
@@ -3562,6 +4615,62 @@ export namespace Prisma {
     messageTitle?: NullableStringFieldUpdateOperationsInput | string | null
     message?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumMessageStatusFieldUpdateOperationsInput | $Enums.MessageStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type namingListCreateInput = {
+    id?: string
+    firstName?: string | null
+    lastName?: string | null
+    phone?: string | null
+    createdAt?: Date | string
+  }
+
+  export type namingListUncheckedCreateInput = {
+    id?: string
+    firstName?: string | null
+    lastName?: string | null
+    phone?: string | null
+    createdAt?: Date | string
+  }
+
+  export type namingListUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type namingListUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type namingListCreateManyInput = {
+    id?: string
+    firstName?: string | null
+    lastName?: string | null
+    phone?: string | null
+    createdAt?: Date | string
+  }
+
+  export type namingListUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type namingListUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -3872,6 +4981,30 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type namingListCountOrderByAggregateInput = {
+    id?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    phone?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type namingListMaxOrderByAggregateInput = {
+    id?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    phone?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type namingListMinOrderByAggregateInput = {
+    id?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    phone?: SortOrder
+    createdAt?: SortOrder
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -4150,6 +5283,10 @@ export namespace Prisma {
      * @deprecated Use ContactListDefaultArgs instead
      */
     export type ContactListArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ContactListDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use namingListDefaultArgs instead
+     */
+    export type namingListArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = namingListDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

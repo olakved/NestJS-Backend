@@ -8,6 +8,7 @@ import { PrismaService } from "./prisma/prisma.service";
 import { AuthFinder } from "./auth/authFinder.service";
 import { ResponseInterceptor } from "./filter/respone.service";
 import { ContactListModule } from "./modules/contact-list/contact-list.module";
+import { NamingModule } from "./modules/naming/naming.module";
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ContactListModule } from "./modules/contact-list/contact-list.module";
     }),
     AuthModule,
     ContactListModule,
+    NamingModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService, AuthFinder, ResponseInterceptor],
