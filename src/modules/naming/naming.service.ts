@@ -45,6 +45,21 @@ export class NamingService {
     };
   }
 
+  async getSingleMssage(phone: string) {
+    const foundMessage = await this.prisma.namingList.findUnique({
+      where: { phone },
+    });
+
+    if (!foundMessage) {
+      throw new BadRequestException("number not found");
+    }
+
+    return {
+      message: `Dear ${foundMessage.firstName}, You have registered. Close and Download Invite`,
+      data: foundMessage,
+    };
+  }
+
   async getAllMessages(dto: GetAllNamingListDto) {
     const { createdAt, page = 1, limit = 10, id, phone } = dto;
 
