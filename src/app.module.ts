@@ -9,6 +9,7 @@ import { AuthFinder } from "./auth/authFinder.service";
 import { ResponseInterceptor } from "./filter/respone.service";
 import { ContactListModule } from "./modules/contact-list/contact-list.module";
 import { NamingModule } from "./modules/naming/naming.module";
+import { WeddingModule } from "./modules/wedding/wedding.module";
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { NamingModule } from "./modules/naming/naming.module";
     AuthModule,
     ContactListModule,
     NamingModule,
+    WeddingModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService, AuthFinder, ResponseInterceptor],

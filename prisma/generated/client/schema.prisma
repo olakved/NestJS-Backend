@@ -51,6 +51,14 @@ model namingList {
   createdAt DateTime @default(now())
 }
 
+model weddingList {
+  id        String   @id @unique @default(uuid())
+  email     String   @unique
+  fullName  String?
+  phone     String?  @unique
+  createdAt DateTime @default(now())
+}
+
 enum Role {
   systemAdmin
   admin
