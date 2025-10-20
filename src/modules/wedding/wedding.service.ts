@@ -26,7 +26,7 @@ export class WeddingService {
       where: { phone: dto.phone },
     });
     if (checkUser) {
-      throw new BadRequestException("User already exists");
+      throw new BadRequestException("User already exists.");
       // return {
       //   message: "User already exist",
       // };
