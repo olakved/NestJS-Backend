@@ -26,10 +26,10 @@ export class WeddingService {
       where: { phone: dto.phone },
     });
     if (checkUser) {
-      //   throw new BadRequestException("User already exists");
-      return {
-        message: "User already exist",
-      };
+      throw new BadRequestException("User already exists");
+      // return {
+      //   message: "User already exist",
+      // };
     }
 
     const createdNaming = await this.prisma.weddingList.create({
