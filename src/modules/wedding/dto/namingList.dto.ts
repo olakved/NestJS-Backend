@@ -13,6 +13,14 @@ export class CreateWeddingDTO {
   @ApiProperty()
   @IsString()
   phone: string;
+
+  @ApiProperty()
+  @IsString()
+  geleOption: boolean;
+
+  @ApiProperty()
+  @IsString()
+  filaOption: boolean;
 }
 
 export class GetAllNamingListDto {
@@ -33,6 +41,10 @@ export class GetAllNamingListDto {
   @ApiProperty({ example: "", required: false })
   @IsString()
   phone: string;
+
+  @ApiProperty({ example: "", required: false })
+  @IsString()
+  email: string;
 
   @ApiProperty({ example: "08-12-2023", required: false })
   createdAt: string;

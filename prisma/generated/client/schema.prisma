@@ -52,11 +52,13 @@ model namingList {
 }
 
 model weddingList {
-  id        String   @id @unique @default(uuid())
-  email     String   @unique
-  fullName  String?
-  phone     String?  @unique
-  createdAt DateTime @default(now())
+  id         String   @id @unique @default(uuid())
+  email      String   @unique
+  fullName   String?
+  phone      String?  @unique
+  geleOption Boolean? @default(false)
+  filaOption Boolean? @default(false)
+  createdAt  DateTime @default(now())
 }
 
 enum Role {

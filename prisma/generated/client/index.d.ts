@@ -4096,6 +4096,8 @@ export namespace Prisma {
     email: string | null
     fullName: string | null
     phone: string | null
+    geleOption: boolean | null
+    filaOption: boolean | null
     createdAt: Date | null
   }
 
@@ -4104,6 +4106,8 @@ export namespace Prisma {
     email: string | null
     fullName: string | null
     phone: string | null
+    geleOption: boolean | null
+    filaOption: boolean | null
     createdAt: Date | null
   }
 
@@ -4112,6 +4116,8 @@ export namespace Prisma {
     email: number
     fullName: number
     phone: number
+    geleOption: number
+    filaOption: number
     createdAt: number
     _all: number
   }
@@ -4122,6 +4128,8 @@ export namespace Prisma {
     email?: true
     fullName?: true
     phone?: true
+    geleOption?: true
+    filaOption?: true
     createdAt?: true
   }
 
@@ -4130,6 +4138,8 @@ export namespace Prisma {
     email?: true
     fullName?: true
     phone?: true
+    geleOption?: true
+    filaOption?: true
     createdAt?: true
   }
 
@@ -4138,6 +4148,8 @@ export namespace Prisma {
     email?: true
     fullName?: true
     phone?: true
+    geleOption?: true
+    filaOption?: true
     createdAt?: true
     _all?: true
   }
@@ -4219,6 +4231,8 @@ export namespace Prisma {
     email: string
     fullName: string | null
     phone: string | null
+    geleOption: boolean | null
+    filaOption: boolean | null
     createdAt: Date
     _count: WeddingListCountAggregateOutputType | null
     _min: WeddingListMinAggregateOutputType | null
@@ -4244,6 +4258,8 @@ export namespace Prisma {
     email?: boolean
     fullName?: boolean
     phone?: boolean
+    geleOption?: boolean
+    filaOption?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["weddingList"]>
 
@@ -4252,6 +4268,8 @@ export namespace Prisma {
     email?: boolean
     fullName?: boolean
     phone?: boolean
+    geleOption?: boolean
+    filaOption?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["weddingList"]>
 
@@ -4260,6 +4278,8 @@ export namespace Prisma {
     email?: boolean
     fullName?: boolean
     phone?: boolean
+    geleOption?: boolean
+    filaOption?: boolean
     createdAt?: boolean
   }
 
@@ -4272,6 +4292,8 @@ export namespace Prisma {
       email: string
       fullName: string | null
       phone: string | null
+      geleOption: boolean | null
+      filaOption: boolean | null
       createdAt: Date
     }, ExtArgs["result"]["weddingList"]>
     composites: {}
@@ -4696,6 +4718,8 @@ export namespace Prisma {
     readonly email: FieldRef<"weddingList", 'String'>
     readonly fullName: FieldRef<"weddingList", 'String'>
     readonly phone: FieldRef<"weddingList", 'String'>
+    readonly geleOption: FieldRef<"weddingList", 'Boolean'>
+    readonly filaOption: FieldRef<"weddingList", 'Boolean'>
     readonly createdAt: FieldRef<"weddingList", 'DateTime'>
   }
     
@@ -5050,6 +5074,8 @@ export namespace Prisma {
     email: 'email',
     fullName: 'fullName',
     phone: 'phone',
+    geleOption: 'geleOption',
+    filaOption: 'filaOption',
     createdAt: 'createdAt'
   };
 
@@ -5424,6 +5450,8 @@ export namespace Prisma {
     email?: StringFilter<"weddingList"> | string
     fullName?: StringNullableFilter<"weddingList"> | string | null
     phone?: StringNullableFilter<"weddingList"> | string | null
+    geleOption?: BoolNullableFilter<"weddingList"> | boolean | null
+    filaOption?: BoolNullableFilter<"weddingList"> | boolean | null
     createdAt?: DateTimeFilter<"weddingList"> | Date | string
   }
 
@@ -5432,6 +5460,8 @@ export namespace Prisma {
     email?: SortOrder
     fullName?: SortOrderInput | SortOrder
     phone?: SortOrderInput | SortOrder
+    geleOption?: SortOrderInput | SortOrder
+    filaOption?: SortOrderInput | SortOrder
     createdAt?: SortOrder
   }
 
@@ -5443,6 +5473,8 @@ export namespace Prisma {
     OR?: weddingListWhereInput[]
     NOT?: weddingListWhereInput | weddingListWhereInput[]
     fullName?: StringNullableFilter<"weddingList"> | string | null
+    geleOption?: BoolNullableFilter<"weddingList"> | boolean | null
+    filaOption?: BoolNullableFilter<"weddingList"> | boolean | null
     createdAt?: DateTimeFilter<"weddingList"> | Date | string
   }, "id" | "id" | "email" | "phone">
 
@@ -5451,6 +5483,8 @@ export namespace Prisma {
     email?: SortOrder
     fullName?: SortOrderInput | SortOrder
     phone?: SortOrderInput | SortOrder
+    geleOption?: SortOrderInput | SortOrder
+    filaOption?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: weddingListCountOrderByAggregateInput
     _max?: weddingListMaxOrderByAggregateInput
@@ -5465,6 +5499,8 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"weddingList"> | string
     fullName?: StringNullableWithAggregatesFilter<"weddingList"> | string | null
     phone?: StringNullableWithAggregatesFilter<"weddingList"> | string | null
+    geleOption?: BoolNullableWithAggregatesFilter<"weddingList"> | boolean | null
+    filaOption?: BoolNullableWithAggregatesFilter<"weddingList"> | boolean | null
     createdAt?: DateTimeWithAggregatesFilter<"weddingList"> | Date | string
   }
 
@@ -5732,6 +5768,8 @@ export namespace Prisma {
     email: string
     fullName?: string | null
     phone?: string | null
+    geleOption?: boolean | null
+    filaOption?: boolean | null
     createdAt?: Date | string
   }
 
@@ -5740,6 +5778,8 @@ export namespace Prisma {
     email: string
     fullName?: string | null
     phone?: string | null
+    geleOption?: boolean | null
+    filaOption?: boolean | null
     createdAt?: Date | string
   }
 
@@ -5748,6 +5788,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
+    geleOption?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    filaOption?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -5756,6 +5798,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
+    geleOption?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    filaOption?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -5764,6 +5808,8 @@ export namespace Prisma {
     email: string
     fullName?: string | null
     phone?: string | null
+    geleOption?: boolean | null
+    filaOption?: boolean | null
     createdAt?: Date | string
   }
 
@@ -5772,6 +5818,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
+    geleOption?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    filaOption?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -5780,6 +5828,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
+    geleOption?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    filaOption?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -6114,11 +6164,18 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type weddingListCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
     fullName?: SortOrder
     phone?: SortOrder
+    geleOption?: SortOrder
+    filaOption?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -6127,6 +6184,8 @@ export namespace Prisma {
     email?: SortOrder
     fullName?: SortOrder
     phone?: SortOrder
+    geleOption?: SortOrder
+    filaOption?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -6135,7 +6194,17 @@ export namespace Prisma {
     email?: SortOrder
     fullName?: SortOrder
     phone?: SortOrder
+    geleOption?: SortOrder
+    filaOption?: SortOrder
     createdAt?: SortOrder
+  }
+
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -6176,6 +6245,10 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -6401,6 +6474,19 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
 

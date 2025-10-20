@@ -161,6 +161,8 @@ exports.Prisma.WeddingListScalarFieldEnum = {
   email: 'email',
   fullName: 'fullName',
   phone: 'phone',
+  geleOption: 'geleOption',
+  filaOption: 'filaOption',
   createdAt: 'createdAt'
 };
 
