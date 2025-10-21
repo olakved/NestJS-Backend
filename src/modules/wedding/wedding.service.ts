@@ -25,8 +25,17 @@ export class WeddingService {
     const checkUser = await this.prisma.weddingList.findUnique({
       where: { phone: dto.phone },
     });
+
     if (checkUser) {
-      throw new BadRequestException("User already exists");
+      throw new BadRequestException("Phone number already exist");
+    }
+
+    const checkUserEmail = await this.prisma.weddingList.findUnique({
+      where: { email: dto.email },
+    });
+
+    if (checkUserEmail) {
+      throw new BadRequestException("Email already exist");
     }
 
     const createdNaming = await this.prisma.weddingList.create({
@@ -34,7 +43,7 @@ export class WeddingService {
     });
 
     if (!createdNaming) {
-      throw new BadRequestException("Failed to send details");
+      throw new BadRequestException("Failed to save details");
     }
 
     return {
