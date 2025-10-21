@@ -47,7 +47,7 @@ export class WeddingService {
     });
 
     if (!createdNaming) {
-      throw new BadRequestException("Failed to save details");
+      throw new BadRequestException("Failed to save details.");
     }
 
     // ✅ Append to Google Sheet AFTER successful DB save
