@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsEmail, IsNumber, IsString } from "class-validator";
+import { IsEmail, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class CreateWeddingDTO {
   @ApiProperty()
@@ -8,19 +8,28 @@ export class CreateWeddingDTO {
 
   @ApiProperty()
   @IsString()
+  @IsOptional()
   email: string;
 
   @ApiProperty()
   @IsString()
+  @IsOptional()
   phone: string;
 
   @ApiProperty()
   @IsString()
+  @IsOptional()
   geleOption: boolean;
 
   @ApiProperty()
   @IsString()
+  @IsOptional()
   filaOption: boolean;
+
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  willAttend: boolean;
 }
 
 export class GetAllNamingListDto {

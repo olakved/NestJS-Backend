@@ -55,7 +55,7 @@ export class WeddingService {
     // ✅ Append to Google Sheet AFTER successful DB save
     try {
       const SPREADSHEET_ID = this.configService.get<string>("SPREADSHEET_ID"); // 👈 replace with your sheet ID
-      const RANGE = "Sheet1!A:E"; // Adjust range based on your columns
+      const RANGE = "Sheet1!A:F"; // Adjust range based on your columns
 
       // Map your data to row (must match sheet column order)
       const row = [
@@ -64,6 +64,7 @@ export class WeddingService {
         createdNaming.phone,
         createdNaming.geleOption ? "Yes" : "No",
         createdNaming.filaOption ? "Yes" : "No",
+        createdNaming.willAttend ? "Yes" : "No",
       ];
 
       await this.googleSheetsService.appendRow(SPREADSHEET_ID, RANGE, [row]);
