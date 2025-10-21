@@ -7,12 +7,16 @@ import { PrismaService } from "../../prisma/prisma.service";
 import { uuidv7 } from "uuidv7";
 import { CreateWeddingDTO, GetAllNamingListDto } from "./dto/namingList.dto";
 import { ResponseInterceptor } from "../../filter/respone.service";
+import { GoogleSheetsService } from "./weddingSheet";
 @UseInterceptors(ResponseInterceptor)
 @Injectable()
 export class WeddingService {
   private timeGenerated: string;
 
-  constructor(private prisma: PrismaService) {
+  constructor(
+    private prisma: PrismaService,
+    private readonly googleSheetsService: GoogleSheetsService,
+  ) {
     this.timeGenerated = new Date().toISOString();
   }
   async createWeddingListDetails(dto: CreateWeddingDTO) {
@@ -44,6 +48,27 @@ export class WeddingService {
 
     if (!createdNaming) {
       throw new BadRequestException("Failed to save details");
+    }
+
+    // ✅ Append to Google Sheet AFTER successful DB save
+    try {
+      const SPREADSHEET_ID = "1ItcszWagGzb1KO8pGDiX9v6OTj2PW9WQehdxl1KGXGM"; // 👈 replace with your sheet ID
+      const RANGE = "Sheet1!A:E"; // Adjust range based on your columns
+
+      // Map your data to row (must match sheet column order)
+      const row = [
+        createdNaming.fullName,
+        createdNaming.email,
+        createdNaming.phone,
+        createdNaming.geleOption ? "Yes" : "No",
+        createdNaming.filaOption ? "Yes" : "No",
+      ];
+
+      await this.googleSheetsService.appendRow(SPREADSHEET_ID, RANGE, [row]);
+    } catch (error) {
+      // Log error but don't fail the main request (optional)
+      console.error("Failed to write to Google Sheets:", error);
+      // You might want to use a queue or retry mechanism in production
     }
 
     return {
