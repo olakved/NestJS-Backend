@@ -8,6 +8,7 @@ import { uuidv7 } from "uuidv7";
 import { CreateWeddingDTO, GetAllNamingListDto } from "./dto/namingList.dto";
 import { ResponseInterceptor } from "../../filter/respone.service";
 import { GoogleSheetsService } from "./weddingSheet";
+import { ConfigService } from "@nestjs/config";
 @UseInterceptors(ResponseInterceptor)
 @Injectable()
 export class WeddingService {
@@ -16,6 +17,7 @@ export class WeddingService {
   constructor(
     private prisma: PrismaService,
     private readonly googleSheetsService: GoogleSheetsService,
+    private configService: ConfigService,
   ) {
     this.timeGenerated = new Date().toISOString();
   }
@@ -52,7 +54,7 @@ export class WeddingService {
 
     // ✅ Append to Google Sheet AFTER successful DB save
     try {
-      const SPREADSHEET_ID = "1ItcszWagGzb1KO8pGDiX9v6OTj2PW9WQehdxl1KGXGM"; // 👈 replace with your sheet ID
+      const SPREADSHEET_ID = this.configService.get<string>("SPREADSHEET_ID"); // 👈 replace with your sheet ID
       const RANGE = "Sheet1!A:E"; // Adjust range based on your columns
 
       // Map your data to row (must match sheet column order)
