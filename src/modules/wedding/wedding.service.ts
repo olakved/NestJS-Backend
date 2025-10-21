@@ -27,9 +27,6 @@ export class WeddingService {
     });
     if (checkUser) {
       throw new BadRequestException("User already exists");
-      // return {
-      //   message: "User already exist",
-      // };
     }
 
     const createdNaming = await this.prisma.weddingList.create({
