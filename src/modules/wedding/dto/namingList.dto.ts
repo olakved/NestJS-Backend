@@ -1,35 +1,43 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsEmail, IsNumber, IsOptional, IsString } from "class-validator";
+import {
+  IsBoolean,
+  IsEmail,
+  IsNumber,
+  IsOptional,
+  IsString,
+  MinLength,
+} from "class-validator";
 
 export class CreateWeddingDTO {
   @ApiProperty()
-  @IsEmail()
+  @IsString()
+  @MinLength(1)
   fullName: string;
 
-  @ApiProperty()
-  @IsString()
+  @ApiProperty({ required: false })
   @IsOptional()
-  email: string;
+  @IsEmail()
+  email?: string;
 
-  @ApiProperty()
-  @IsString()
+  @ApiProperty({ required: false })
   @IsOptional()
-  phone: string;
+  @IsString()
+  phone?: string;
 
-  @ApiProperty()
-  @IsString()
+  @ApiProperty({ required: false })
   @IsOptional()
-  geleOption: boolean;
+  @IsBoolean()
+  geleOption?: boolean;
 
-  @ApiProperty()
-  @IsString()
+  @ApiProperty({ required: false })
   @IsOptional()
-  filaOption: boolean;
+  @IsBoolean()
+  filaOption?: boolean;
 
-  @ApiProperty()
-  @IsString()
+  @ApiProperty({ required: false })
   @IsOptional()
-  willAttend: boolean;
+  @IsBoolean()
+  willAttend?: boolean;
 }
 
 export class GetAllNamingListDto {
