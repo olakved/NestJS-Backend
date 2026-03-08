@@ -59,7 +59,7 @@ export class WeddingService {
     // ✅ Append to Google Sheet AFTER successful DB save
     try {
       const SPREADSHEET_ID = this.configService.get<string>("SPREADSHEET_ID"); // 👈 replace with your sheet ID
-      const RANGE = "Sheet1!A:E"; // Adjust range based on your columns
+      const RANGE = "Sheet2!A:E";
 
       // Map your data to row (must match sheet column order)
       const row = [
