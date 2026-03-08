@@ -28,20 +28,24 @@ export class WeddingService {
       createdAt: this.timeGenerated,
     };
 
-    const checkUser = await this.prisma.weddingList.findUnique({
-      where: { phone: dto.phone },
-    });
+    if (dto.phone) {
+      const checkUser = await this.prisma.weddingList.findUnique({
+        where: { phone: dto.phone },
+      });
 
-    if (checkUser) {
-      throw new BadRequestException("Phone number already exist");
+      if (checkUser) {
+        throw new BadRequestException("Phone number already exist");
+      }
     }
 
-    const checkUserEmail = await this.prisma.weddingList.findUnique({
-      where: { email: dto.email },
-    });
+    if (dto.email) {
+      const checkUserEmail = await this.prisma.weddingList.findUnique({
+        where: { email: dto.email },
+      });
 
-    if (checkUserEmail) {
-      throw new BadRequestException("Email already exist");
+      if (checkUserEmail) {
+        throw new BadRequestException("Email already exist");
+      }
     }
 
     const createdNaming = await this.prisma.weddingList.create({
