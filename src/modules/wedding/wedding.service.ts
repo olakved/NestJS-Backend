@@ -62,8 +62,8 @@ export class WeddingService {
         createdNaming.fullName,
         createdNaming.email,
         createdNaming.phone,
-        createdNaming.geleOption ? "Yes" : "No",
-        createdNaming.filaOption ? "Yes" : "No",
+        createdNaming.dietary ?? "",
+        createdNaming.willAttend ? "Yes" : "No",
       ];
 
       await this.googleSheetsService.appendRow(SPREADSHEET_ID, RANGE, [row]);

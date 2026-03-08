@@ -163,6 +163,8 @@ exports.Prisma.WeddingListScalarFieldEnum = {
   phone: 'phone',
   geleOption: 'geleOption',
   filaOption: 'filaOption',
+  dietary: 'dietary',
+  willAttend: 'willAttend',
   createdAt: 'createdAt'
 };
 

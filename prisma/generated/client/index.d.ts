@@ -4098,6 +4098,8 @@ export namespace Prisma {
     phone: string | null
     geleOption: boolean | null
     filaOption: boolean | null
+    dietary: string | null
+    willAttend: boolean | null
     createdAt: Date | null
   }
 
@@ -4108,6 +4110,8 @@ export namespace Prisma {
     phone: string | null
     geleOption: boolean | null
     filaOption: boolean | null
+    dietary: string | null
+    willAttend: boolean | null
     createdAt: Date | null
   }
 
@@ -4118,6 +4122,8 @@ export namespace Prisma {
     phone: number
     geleOption: number
     filaOption: number
+    dietary: number
+    willAttend: number
     createdAt: number
     _all: number
   }
@@ -4130,6 +4136,8 @@ export namespace Prisma {
     phone?: true
     geleOption?: true
     filaOption?: true
+    dietary?: true
+    willAttend?: true
     createdAt?: true
   }
 
@@ -4140,6 +4148,8 @@ export namespace Prisma {
     phone?: true
     geleOption?: true
     filaOption?: true
+    dietary?: true
+    willAttend?: true
     createdAt?: true
   }
 
@@ -4150,6 +4160,8 @@ export namespace Prisma {
     phone?: true
     geleOption?: true
     filaOption?: true
+    dietary?: true
+    willAttend?: true
     createdAt?: true
     _all?: true
   }
@@ -4228,11 +4240,13 @@ export namespace Prisma {
 
   export type WeddingListGroupByOutputType = {
     id: string
-    email: string
+    email: string | null
     fullName: string | null
     phone: string | null
     geleOption: boolean | null
     filaOption: boolean | null
+    dietary: string | null
+    willAttend: boolean | null
     createdAt: Date
     _count: WeddingListCountAggregateOutputType | null
     _min: WeddingListMinAggregateOutputType | null
@@ -4260,6 +4274,8 @@ export namespace Prisma {
     phone?: boolean
     geleOption?: boolean
     filaOption?: boolean
+    dietary?: boolean
+    willAttend?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["weddingList"]>
 
@@ -4270,6 +4286,8 @@ export namespace Prisma {
     phone?: boolean
     geleOption?: boolean
     filaOption?: boolean
+    dietary?: boolean
+    willAttend?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["weddingList"]>
 
@@ -4280,6 +4298,8 @@ export namespace Prisma {
     phone?: boolean
     geleOption?: boolean
     filaOption?: boolean
+    dietary?: boolean
+    willAttend?: boolean
     createdAt?: boolean
   }
 
@@ -4289,11 +4309,13 @@ export namespace Prisma {
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      email: string
+      email: string | null
       fullName: string | null
       phone: string | null
       geleOption: boolean | null
       filaOption: boolean | null
+      dietary: string | null
+      willAttend: boolean | null
       createdAt: Date
     }, ExtArgs["result"]["weddingList"]>
     composites: {}
@@ -4720,6 +4742,8 @@ export namespace Prisma {
     readonly phone: FieldRef<"weddingList", 'String'>
     readonly geleOption: FieldRef<"weddingList", 'Boolean'>
     readonly filaOption: FieldRef<"weddingList", 'Boolean'>
+    readonly dietary: FieldRef<"weddingList", 'String'>
+    readonly willAttend: FieldRef<"weddingList", 'Boolean'>
     readonly createdAt: FieldRef<"weddingList", 'DateTime'>
   }
     
@@ -4891,7 +4915,7 @@ export namespace Prisma {
     /**
      * The data needed to create a weddingList.
      */
-    data: XOR<weddingListCreateInput, weddingListUncheckedCreateInput>
+    data?: XOR<weddingListCreateInput, weddingListUncheckedCreateInput>
   }
 
   /**
@@ -5076,6 +5100,8 @@ export namespace Prisma {
     phone: 'phone',
     geleOption: 'geleOption',
     filaOption: 'filaOption',
+    dietary: 'dietary',
+    willAttend: 'willAttend',
     createdAt: 'createdAt'
   };
 
@@ -5447,21 +5473,25 @@ export namespace Prisma {
     OR?: weddingListWhereInput[]
     NOT?: weddingListWhereInput | weddingListWhereInput[]
     id?: StringFilter<"weddingList"> | string
-    email?: StringFilter<"weddingList"> | string
+    email?: StringNullableFilter<"weddingList"> | string | null
     fullName?: StringNullableFilter<"weddingList"> | string | null
     phone?: StringNullableFilter<"weddingList"> | string | null
     geleOption?: BoolNullableFilter<"weddingList"> | boolean | null
     filaOption?: BoolNullableFilter<"weddingList"> | boolean | null
+    dietary?: StringNullableFilter<"weddingList"> | string | null
+    willAttend?: BoolNullableFilter<"weddingList"> | boolean | null
     createdAt?: DateTimeFilter<"weddingList"> | Date | string
   }
 
   export type weddingListOrderByWithRelationInput = {
     id?: SortOrder
-    email?: SortOrder
+    email?: SortOrderInput | SortOrder
     fullName?: SortOrderInput | SortOrder
     phone?: SortOrderInput | SortOrder
     geleOption?: SortOrderInput | SortOrder
     filaOption?: SortOrderInput | SortOrder
+    dietary?: SortOrderInput | SortOrder
+    willAttend?: SortOrderInput | SortOrder
     createdAt?: SortOrder
   }
 
@@ -5475,16 +5505,20 @@ export namespace Prisma {
     fullName?: StringNullableFilter<"weddingList"> | string | null
     geleOption?: BoolNullableFilter<"weddingList"> | boolean | null
     filaOption?: BoolNullableFilter<"weddingList"> | boolean | null
+    dietary?: StringNullableFilter<"weddingList"> | string | null
+    willAttend?: BoolNullableFilter<"weddingList"> | boolean | null
     createdAt?: DateTimeFilter<"weddingList"> | Date | string
   }, "id" | "id" | "email" | "phone">
 
   export type weddingListOrderByWithAggregationInput = {
     id?: SortOrder
-    email?: SortOrder
+    email?: SortOrderInput | SortOrder
     fullName?: SortOrderInput | SortOrder
     phone?: SortOrderInput | SortOrder
     geleOption?: SortOrderInput | SortOrder
     filaOption?: SortOrderInput | SortOrder
+    dietary?: SortOrderInput | SortOrder
+    willAttend?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: weddingListCountOrderByAggregateInput
     _max?: weddingListMaxOrderByAggregateInput
@@ -5496,11 +5530,13 @@ export namespace Prisma {
     OR?: weddingListScalarWhereWithAggregatesInput[]
     NOT?: weddingListScalarWhereWithAggregatesInput | weddingListScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"weddingList"> | string
-    email?: StringWithAggregatesFilter<"weddingList"> | string
+    email?: StringNullableWithAggregatesFilter<"weddingList"> | string | null
     fullName?: StringNullableWithAggregatesFilter<"weddingList"> | string | null
     phone?: StringNullableWithAggregatesFilter<"weddingList"> | string | null
     geleOption?: BoolNullableWithAggregatesFilter<"weddingList"> | boolean | null
     filaOption?: BoolNullableWithAggregatesFilter<"weddingList"> | boolean | null
+    dietary?: StringNullableWithAggregatesFilter<"weddingList"> | string | null
+    willAttend?: BoolNullableWithAggregatesFilter<"weddingList"> | boolean | null
     createdAt?: DateTimeWithAggregatesFilter<"weddingList"> | Date | string
   }
 
@@ -5765,71 +5801,85 @@ export namespace Prisma {
 
   export type weddingListCreateInput = {
     id?: string
-    email: string
+    email?: string | null
     fullName?: string | null
     phone?: string | null
     geleOption?: boolean | null
     filaOption?: boolean | null
+    dietary?: string | null
+    willAttend?: boolean | null
     createdAt?: Date | string
   }
 
   export type weddingListUncheckedCreateInput = {
     id?: string
-    email: string
+    email?: string | null
     fullName?: string | null
     phone?: string | null
     geleOption?: boolean | null
     filaOption?: boolean | null
+    dietary?: string | null
+    willAttend?: boolean | null
     createdAt?: Date | string
   }
 
   export type weddingListUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     geleOption?: NullableBoolFieldUpdateOperationsInput | boolean | null
     filaOption?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    dietary?: NullableStringFieldUpdateOperationsInput | string | null
+    willAttend?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type weddingListUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     geleOption?: NullableBoolFieldUpdateOperationsInput | boolean | null
     filaOption?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    dietary?: NullableStringFieldUpdateOperationsInput | string | null
+    willAttend?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type weddingListCreateManyInput = {
     id?: string
-    email: string
+    email?: string | null
     fullName?: string | null
     phone?: string | null
     geleOption?: boolean | null
     filaOption?: boolean | null
+    dietary?: string | null
+    willAttend?: boolean | null
     createdAt?: Date | string
   }
 
   export type weddingListUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     geleOption?: NullableBoolFieldUpdateOperationsInput | boolean | null
     filaOption?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    dietary?: NullableStringFieldUpdateOperationsInput | string | null
+    willAttend?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type weddingListUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     geleOption?: NullableBoolFieldUpdateOperationsInput | boolean | null
     filaOption?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    dietary?: NullableStringFieldUpdateOperationsInput | string | null
+    willAttend?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -6176,6 +6226,8 @@ export namespace Prisma {
     phone?: SortOrder
     geleOption?: SortOrder
     filaOption?: SortOrder
+    dietary?: SortOrder
+    willAttend?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -6186,6 +6238,8 @@ export namespace Prisma {
     phone?: SortOrder
     geleOption?: SortOrder
     filaOption?: SortOrder
+    dietary?: SortOrder
+    willAttend?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -6196,6 +6250,8 @@ export namespace Prisma {
     phone?: SortOrder
     geleOption?: SortOrder
     filaOption?: SortOrder
+    dietary?: SortOrder
+    willAttend?: SortOrder
     createdAt?: SortOrder
   }
 
